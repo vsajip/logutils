@@ -1,0 +1,11 @@
+include README.txt
+include NEWS.txt
+include doc/*.html
+include doc/*.js
+include doc/_static/*.css
+include doc/_static/*.js
+include doc/_static/*.png
+include doc/*.rst
+include doc/conf.py
+include tests/*.py
+
