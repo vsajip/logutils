@@ -2,6 +2,9 @@ import sys
 from test_testing import LoggingTest
 from test_dictconfig import ConfigDictTest
 from test_queue import QueueTest
+from test_formatter import FormatterTest
+from test_messages import MessageTest
+
 # The adapter won't work in < 2.5 because the "extra" parameter used by it
 # only appeared in 2.5 :-(
 if sys.version_info[:2] >= (2, 5):

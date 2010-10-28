@@ -14,7 +14,24 @@
 # IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
+"""
+This module contains classes which help you work with queues. A typical
+application is when you want to log from performance-critical threads, but
+where the handlers you want to use are slow (for example,
+:class:`~logging.handlers.SMTPHandler`). In that case, you can create a queue,
+pass it to a :class:`QueueHandler` instance and use that instance with your
+loggers. Elsewhere, you can instantiate a :class:`QueueListener` with the same
+queue and some slow handlers, and call :meth:`~QueueListener.start` on it.
+This will start monitoring the queue on a separate thread and call all the
+configured handlers *on that thread*, so that your logging thread is not held
+up by the slow handlers.
 
+Note that as well as in-process queues, you can use these classes with queues
+from the :mod:`multiprocessing` module.
+
+**N.B.** This is part of the standard library since Python 3.2, so the
+version here is for use with earlier Python versions.
+"""
 import logging
 try:
     import Queue as queue
@@ -28,9 +45,8 @@ class QueueHandler(logging.Handler):
     with a multiprocessing Queue to centralise logging to file in one process
     (in a multi-process application), so as to avoid file write contention
     between processes.
-
-    This code is new in Python 3.2, but this class can be copy pasted into
-    user code for use with earlier Python versions.
+    
+    :param queue: The queue to send `LogRecords` to.
     """
 
     def __init__(self, queue):
@@ -44,9 +60,11 @@ class QueueHandler(logging.Handler):
         """
         Enqueue a record.
 
-        The base implementation uses put_nowait. You may want to override
-        this method if you want to use blocking, timeouts or custom queue
-        implementations.
+        The base implementation uses :meth:`~queue.Queue.put_nowait`. You may
+        want to override this method if you want to use blocking, timeouts or
+        custom queue implementations.
+        
+        :param record: The record to enqueue.
         """
         self.queue.put_nowait(record)
 
@@ -62,6 +80,8 @@ class QueueHandler(logging.Handler):
         You might want to override this method if you want to convert
         the record to a dict or JSON string, or send a modified copy
         of the record while leaving the original intact.
+        
+        :param record: The record to prepare.
         """
         # The format operation gets traceback text into record.exc_text
         # (if there's exception data), and also puts the message into
@@ -80,6 +100,8 @@ class QueueHandler(logging.Handler):
         Emit a record.
 
         Writes the LogRecord to the queue, preparing it for pickling first.
+        
+        :param record: The record to emit.
         """
         try:
             self.enqueue(self.prepare(record))
@@ -93,6 +115,10 @@ class QueueListener(object):
     This class implements an internal threaded listener which watches for
     LogRecords being added to a queue, removes them and passes them to a
     list of handlers for processing.
+            
+    :param record: The queue to listen to.
+    :param handlers: The handlers to invoke on everything received from
+                     the queue.
     """
     _sentinel = None
 
@@ -110,8 +136,13 @@ class QueueListener(object):
         """
         Dequeue a record and return it, optionally blocking.
 
-        The base implementation uses get. You may want to override this method
-        if you want to use timeouts or work with custom queue implementations.
+        The base implementation uses :meth:`~queue.Queue.get`. You may want to
+        override this method if you want to use timeouts or work with custom
+        queue implementations.
+        
+        :param block: Whether to block if the queue is empty. If `False` and
+                      the queue is empty, an :class:`~queue.Empty` exception
+                      will be thrown.
         """
         return self.queue.get(block)
 
@@ -133,6 +164,8 @@ class QueueListener(object):
         This method just returns the passed-in record. You may want to
         override this method if you need to do any custom marshalling or
         manipulation of the record before passing it to the handlers.
+        
+        :param record: The record to prepare.
         """
         return record
 
@@ -142,6 +175,8 @@ class QueueListener(object):
 
         This just loops through the handlers offering them the record
         to handle.
+
+        :param record: The record to handle.
         """
         record = self.prepare(record)
         for handler in self.handlers:
@@ -191,23 +226,4 @@ class QueueListener(object):
         self.queue.put_nowait(self._sentinel)
         self._thread.join()
         self._thread = None
-
-class NullHandler(logging.Handler):
-    """
-    This handler does nothing. It's intended to be used to avoid the
-    "No handlers could be found for logger XXX" one-off warning. This is
-    important for library code, which may contain code to log events. If a user
-    of the library does not configure logging, the one-off warning might be
-    produced; to avoid this, the library developer simply needs to instantiate
-    a NullHandler and add it to the top-level logger of the library module or
-    package.
-    """
-    def handle(self, record):
-        pass
-
-    def emit(self, record):
-        pass
-
-    def createLock(self):
-        self.lock = None
 

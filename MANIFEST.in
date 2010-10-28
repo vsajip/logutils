@@ -7,5 +7,6 @@ include doc/_static/*.js
 include doc/_static/*.png
 include doc/*.rst
 include doc/conf.py
+include doc/Makefile
 include tests/*.py
 

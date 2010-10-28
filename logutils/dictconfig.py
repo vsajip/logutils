@@ -154,8 +154,13 @@ class BaseConfigurator(object):
 
     # We might want to use a different one, e.g. importlib
     importer = __import__
+    "Allows the importer to be redefined."
 
     def __init__(self, config):
+        """
+        Initialise an instance with the specified configuration
+        dictionary.
+        """
         self.config = ConvertingDict(config)
         self.config.configurator = self
 

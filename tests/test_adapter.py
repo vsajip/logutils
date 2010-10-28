@@ -54,6 +54,14 @@ class AdapterTest(unittest.TestCase):
                                   message='nd so w'))
         self.assertFalse(h.matches(levelno=logging.INFO))
 
+    def test_hashandlers(self):
+        "Test of hasHandlers() functionality."
+        self.assertTrue(self.adapter.hasHandlers())
+        self.logger.removeHandler(self.handler)
+        self.assertFalse(self.adapter.hasHandlers())
+        self.logger.addHandler(self.handler)
+        self.assertTrue(self.adapter.hasHandlers())
+
 if __name__ == '__main__':
     unittest.main()
 

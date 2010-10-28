@@ -16,6 +16,7 @@
 #
 
 import logging
+import logutils
 
 class LoggerAdapter(object):
     """
@@ -125,15 +126,5 @@ class LoggerAdapter(object):
         """
         See if the underlying logger has any handlers.
         """
-        l = self.logger
-        rv = False
-        while l:
-            if l.handlers:
-                rv = True
-                break
-            elif not l.propagate:
-                break
-            else:
-                l = l.parent
-        return rv
+        return logutils.hasHandlers(self.logger)
 

@@ -4,11 +4,20 @@ class HTTPHandler(logging.Handler):
     """
     A class which sends records to a Web server, using either GET or
     POST semantics.
+
+    :param host: The Web server to connect to.
+    :param url: The URL to use for the connection.
+    :param method: The HTTP method to use. GET and POST are supported.
+    :param secure: set to True if HTTPS is to be used.
+    :param credentials: Set to a username/password tuple if desired. If
+                        set, a Basic authentication header is sent. WARNING:
+                        if using credentials, make sure `secure` is `True`
+                        to avoid sending usernames and passwords in
+                        cleartext over the wire.
     """
     def __init__(self, host, url, method="GET", secure=False, credentials=None):
         """
-        Initialize the instance with the host, the request URL, and the method
-        ("GET" or "POST")
+        Initialize an instance.
         """
         logging.Handler.__init__(self)
         method = method.upper()
@@ -25,6 +34,8 @@ class HTTPHandler(logging.Handler):
         Default implementation of mapping the log record into a dict
         that is sent as the CGI data. Overwrite in your class.
         Contributed by Franz Glasner.
+        
+        :param record: The record to be mapped.
         """
         return record.__dict__
 
@@ -33,6 +44,8 @@ class HTTPHandler(logging.Handler):
         Emit a record.
 
         Send the record to the Web server as a percent-encoded dictionary
+
+        :param record: The record to be emitted.
         """
         try:
             import http.client, urllib.parse
