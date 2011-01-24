@@ -10,7 +10,7 @@ of Python, and so are packaged here.
 import logging
 from string import Template
 
-__version__ = '0.2'
+__version__ = '0.3'
 
 class NullHandler(logging.Handler):
     """
@@ -156,18 +156,24 @@ class BraceMessage(object):
         self.fmt = fmt
         self.args = args
         self.kwargs = kwargs
+        self.str = None
         
     def __str__(self):
-        return self.fmt.format(*self.args, **self.kwargs)
+        if self.str is None:
+            self.str = self.fmt.format(*self.args, **self.kwargs)
+        return self.str
 
 class DollarMessage(object):
     def __init__(self, fmt, **kwargs):
         self.fmt = fmt
         self.kwargs = kwargs
+        self.str = None
         
     def __str__(self):
-        from string import Template
-        return Template(self.fmt).substitute(**self.kwargs)
+        if self.str is None:
+            self.str = Template(self.fmt).substitute(**self.kwargs)
+        return self.str
+
 
 def hasHandlers(logger):
     """

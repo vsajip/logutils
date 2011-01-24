@@ -1,6 +1,14 @@
 What's New in logutils
 ======================
 
+Version 0.3
+-----------
+
+- Added caches for BraceMessage/DollarMessage.
+
+- Added ColorizingStreamHandler.
+
+
 Version 0.2
 -----------
 

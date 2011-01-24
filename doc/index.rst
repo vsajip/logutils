@@ -19,6 +19,7 @@ tasks you may want to perform:
    dictconfig
    adapter
    http
+   colorize
 
 Indices and tables
 ==================
