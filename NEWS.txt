@@ -1,13 +1,20 @@
+:orphan:
+
+.. _whats-new:
+
 What's New in logutils
 ======================
+
+Version 0.3.1
+-------------
+
+- Improvements in setup.py and documentation.
 
 Version 0.3
 -----------
 
 - Added caches for BraceMessage/DollarMessage.
-
 - Added ColorizingStreamHandler.
-
 
 Version 0.2
 -----------

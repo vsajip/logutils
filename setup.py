@@ -24,7 +24,9 @@ import re
 
 
 def description():
-    readme = open(join(dirname(__file__), 'README.txt')).read()
+    f = open(join(dirname(__file__), 'README.txt'))
+    readme = f.read()
+    f.close()
     regexp = r'^logutils\s*[\d.]*\s*\n=======+\s*\n(.*)Requirements '
     reqts, = re.findall(regexp, readme, re.DOTALL)
     regexp = r'Availability & Documentation\s*\n-----+\s*\n(.*)'
@@ -60,12 +62,13 @@ distutils.core.setup(
     long_description = description(),
     license='New BSD',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        "Programming Language :: Python :: 3",
         'Topic :: Software Development',
     ],
     packages=['logutils'],

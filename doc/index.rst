@@ -7,6 +7,8 @@ Logutils documentation
 
 .. automodule:: logutils
 
+   For recent changes, see :ref:`whats-new`.
+
 There are a number of subcomponents to this package, relating to particular
 tasks you may want to perform:
 
