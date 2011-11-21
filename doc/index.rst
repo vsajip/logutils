@@ -17,6 +17,7 @@ tasks you may want to perform:
 
    libraries
    queue
+   redis
    testing
    dictconfig
    adapter

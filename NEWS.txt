@@ -5,6 +5,15 @@
 What's New in logutils
 ======================
 
+Version 0.3.2
+-------------
+
+- Improvements in QueueListener implementation.
+- Added redis module with RedisQueueHandler and
+  RedisQueueListener.
+- Added unit test for a handler in a module
+  where absolute imports are used.
+
 Version 0.3.1
 -------------
 

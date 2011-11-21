@@ -483,6 +483,39 @@ class ConfigDictTest(unittest.TestCase):
         },
     } 
 
+    # As config10, but declaring a handler in a module using
+    # absolute imports
+    config11 = {
+        'version': 1,
+        'formatters': {
+            'form1' : {
+                'format' : '%(levelname)s ++ %(message)s',
+            },
+        },
+        'filters' : {
+            'filt1' : {
+                'name' : 'compiler.parser',
+            },
+        },
+        'handlers' : {
+            'hand1' : {
+                '()': 'mytest.MyTestHandler',
+                'formatter': 'form1',
+                'filters' : ['filt1'],
+            }
+        },
+        'loggers' : {
+            'compiler.parser' : {
+                'level' : 'DEBUG',
+                'filters' : ['filt1'],
+            },
+        },
+        'root' : {
+            'level' : 'WARNING',
+            'handlers' : ['hand1'],
+        },
+    } 
+
     def apply_config(self, conf):
         dictConfig(conf)
 
@@ -660,3 +693,9 @@ class ConfigDictTest(unittest.TestCase):
                             dict(levelname='ERROR', message='4'),
                         ]))
  
+    def test_config_11_ok(self):
+        self.apply_config(self.config11)
+        h = logging.getLogger().handlers[0]
+        self.assertEqual(h.__module__, 'mytest')
+        self.assertEqual(h.__class__.__name__, 'MyTestHandler')
+
