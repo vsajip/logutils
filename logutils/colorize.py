@@ -1,9 +1,14 @@
 #
-# Copyright (C) 2010-2011 Vinay Sajip. All rights reserved.
+# Copyright (C) 2010-2013 Vinay Sajip. All rights reserved.
 #
 import ctypes
 import logging
 import os
+
+try:
+    unicode
+except NameError:
+    unicode = None
 
 class ColorizingStreamHandler(logging.StreamHandler):
     """
@@ -58,6 +63,9 @@ class ColorizingStreamHandler(logging.StreamHandler):
         try:
             message = self.format(record)
             stream = self.stream
+            if unicode and isinstance(message, unicode):
+                enc = getattr(stream, 'encoding', 'utf-8')
+                message = message.encode(enc, 'replace')
             if not self.is_tty:
                 stream.write(message)
             else:

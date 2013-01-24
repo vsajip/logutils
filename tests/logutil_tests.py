@@ -1,9 +1,13 @@
+#
+# Copyright (C) 2008-2013 Vinay Sajip. See LICENSE.txt for details.
+#
 import sys
 from test_testing import LoggingTest
 from test_dictconfig import ConfigDictTest
 from test_queue import QueueTest
 from test_formatter import FormatterTest
 from test_messages import MessageTest
+from test_colorize import ColorizeTest
 try:
     from test_redis import RedisQueueTest
 except ImportError:

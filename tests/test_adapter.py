@@ -1,3 +1,6 @@
+#
+# Copyright (C) 2008-2013 Vinay Sajip. See LICENSE.txt for details.
+#
 import logging
 from logutils.adapter import LoggerAdapter
 from logutils.testing import TestHandler, Matcher

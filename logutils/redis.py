@@ -1,3 +1,6 @@
+#
+# Copyright (C) 2011-2013 Vinay Sajip. See LICENSE.txt for details.
+#
 """
 This module contains classes which help you work with Redis queues.
 """

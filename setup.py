@@ -43,7 +43,7 @@ distutils.core.setup(
     url='http://code.google.com/p/logutils/',
     description='Logging utilities',
     long_description = description(),
-    license='Copyright (C) 2010-2011 by Vinay Sajip. All Rights Reserved. See LICENSE.txt for license.',
+    license='Copyright (C) 2010-2013 by Vinay Sajip. All Rights Reserved. See LICENSE.txt for license.',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -51,6 +51,7 @@ distutils.core.setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
         'Topic :: Software Development',
     ],

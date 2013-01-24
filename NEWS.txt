@@ -5,6 +5,11 @@
 What's New in logutils
 ======================
 
+Version 0.3.3
+-------------
+
+- Added encoding support to ColorizingStreamHandler.
+
 Version 0.3.2
 -------------
 

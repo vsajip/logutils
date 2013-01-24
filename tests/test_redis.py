@@ -1,3 +1,6 @@
+#
+# Copyright (C) 2011-2013 Vinay Sajip. See LICENSE.txt for details.
+#
 import logging
 from logutils.testing import TestHandler, Matcher
 from logutils.redis import RedisQueueHandler, RedisQueueListener

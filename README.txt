@@ -1,5 +1,5 @@
-logutils 0.1
-============
+logutils 0.3.3
+==============
 The logutils package provides a set of handlers for the Python standard
 library's logging package.
 

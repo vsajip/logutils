@@ -1,3 +1,6 @@
+#
+# Copyright (C) 2010-2013 Vinay Sajip. See LICENSE.txt for details.
+#
 """
 The logutils package provides a set of handlers for the Python standard
 library's logging package.
@@ -10,7 +13,7 @@ of Python, and so are packaged here.
 import logging
 from string import Template
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 class NullHandler(logging.Handler):
     """
