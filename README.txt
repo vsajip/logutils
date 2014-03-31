@@ -18,7 +18,7 @@ installed with the standard Python installation procedure:
 There is a set of unit tests which you can invoke with
 
   python setup.py test
-  
+
 before running the installation.
 
 Availability & Documentation
@@ -26,4 +26,9 @@ Availability & Documentation
 The latest version of logutils can be found at:
 
   http://code.google.com/p/logutils/
+
+The source code repository is at:
+
+https://bitbucket.org/vinay.sajip/logutils/
+
 
