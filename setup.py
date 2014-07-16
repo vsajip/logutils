@@ -27,7 +27,9 @@ class TestCommand(distutils.core.Command):
         import logutil_tests
         loader = unittest.TestLoader()
         runner = unittest.TextTestRunner()
-        runner.run(loader.loadTestsFromModule(logutil_tests))
+        test_results = runner.run(loader.loadTestsFromModule(logutil_tests))
+        if not test_results.wasSuccessful():
+            sys.exit(1)
 
     def initialize_options(self):
         pass
