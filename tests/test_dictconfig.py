@@ -27,6 +27,12 @@ def testHandler():
 def handlerFunc():
     return logging.StreamHandler()
 
+def is_python2():
+    if sys.version_info >= (2, 0) and sys.version_info < (3, 0):
+        return True
+    else:
+        return False
+
 class CustomHandler(logging.StreamHandler):
     pass
 
@@ -44,7 +50,8 @@ class ConfigDictTest(unittest.TestCase):
             self.saved_handlers = logging._handlers.copy()
             self.saved_handler_list = logging._handlerList[:]
             self.saved_loggers = logger_dict.copy()
-            self.saved_level_names = logging._levelNames.copy()
+            if is_python2():
+                self.saved_level_names = logging._levelNames.copy()
         finally:
             logging._releaseLock()
 
@@ -56,8 +63,9 @@ class ConfigDictTest(unittest.TestCase):
         self.root_logger.setLevel(self.original_logging_level)
         logging._acquireLock()
         try:
-            logging._levelNames.clear()
-            logging._levelNames.update(self.saved_level_names)
+            if is_python2():
+                logging._levelNames.clear()
+                logging._levelNames.update(self.saved_level_names)
             logging._handlers.clear()
             logging._handlers.update(self.saved_handlers)
             logging._handlerList[:] = self.saved_handler_list
