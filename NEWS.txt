@@ -5,6 +5,12 @@
 What's New in logutils
 ======================
 
+Version 0.3.4
+-------------
+
+- Return non-zero error code from "setup.py test" when a test fails.
+- Make the dictConfig tests work with both Python 2.x and 3.x.
+
 Version 0.3.3
 -------------
 
