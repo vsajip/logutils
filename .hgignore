@@ -1,4 +1,5 @@
 \.py[co]
-(build|dist)/
+(build|dist|doc/themes)/
 .coverage$
+MANIFEST
 
