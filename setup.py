@@ -22,7 +22,7 @@ class TestCommand(distutils.core.Command):
     def run(self):
         import sys
         import unittest
-        
+
         sys.path.append(join(dirname(__file__), 'tests'))
         import logutil_tests
         loader = unittest.TestLoader()
@@ -45,7 +45,7 @@ distutils.core.setup(
     url='http://code.google.com/p/logutils/',
     description='Logging utilities',
     long_description = description(),
-    license='Copyright (C) 2010-2013 by Vinay Sajip. All Rights Reserved. See LICENSE.txt for license.',
+    license='Copyright (C) 2010-2017 by Vinay Sajip. All Rights Reserved. See LICENSE.txt for license.',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -61,5 +61,5 @@ distutils.core.setup(
     cmdclass={
         'test': TestCommand,
     },
-    
+
 )

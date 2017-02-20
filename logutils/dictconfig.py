@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2009-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2009-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging.handlers
 import re

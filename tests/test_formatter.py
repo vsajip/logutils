@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2009-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2009-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 import logutils
@@ -71,5 +71,3 @@ class FormatterTest(unittest.TestCase):
         self.assertTrue(f.usesTime())
         f = logutils.Formatter('asctime', style='$')
         self.assertFalse(f.usesTime())
-
-

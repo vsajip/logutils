@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2011-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 from logutils.testing import TestHandler, Matcher
@@ -49,7 +49,7 @@ class RedisQueueTest(unittest.TestCase):
         if time.time() >= maxtime:
             raise Exception('unable to connect to Redis server')
         sock.close()
-              
+
     def test_simple(self):
         "Simple test of queue handling and listening."
         # Just as a demo, let's log some messages.
@@ -96,4 +96,3 @@ class RedisQueueTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

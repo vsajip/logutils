@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2010-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2010-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 import logutils
@@ -113,4 +113,3 @@ class LoggerAdapter(object):
         See if the underlying logger has any handlers.
         """
         return logutils.hasHandlers(self.logger)
-

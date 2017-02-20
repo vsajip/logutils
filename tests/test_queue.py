@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2010-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2010-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 from logutils.testing import TestHandler, Matcher
@@ -67,4 +67,3 @@ class QueueTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

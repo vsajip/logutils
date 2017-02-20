@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2010-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2010-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 
@@ -37,7 +37,7 @@ class HTTPHandler(logging.Handler):
         Default implementation of mapping the log record into a dict
         that is sent as the CGI data. Overwrite in your class.
         Contributed by Franz Glasner.
-        
+
         :param record: The record to be mapped.
         """
         return record.__dict__
@@ -87,4 +87,3 @@ class HTTPHandler(logging.Handler):
             raise
         except:
             self.handleError(record)
-

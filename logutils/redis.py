@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2011-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 """
 This module contains classes which help you work with Redis queues.
@@ -15,7 +15,7 @@ class RedisQueueHandler(QueueHandler):
     """
     A QueueHandler implementation which pushes pickled
     records to a Redis queue using a specified key.
-    
+
     :param key: The key to use for the queue. Defaults to
                 "python.logging".
     :param redis: If specified, this instance is used to
@@ -31,7 +31,7 @@ class RedisQueueHandler(QueueHandler):
         assert limit >= 0
         self.limit = limit
         QueueHandler.__init__(self, redis)
-        
+
     def enqueue(self, record):
         s = pickle.dumps(vars(record))
         self.queue.rpush(self.key, s)
@@ -42,7 +42,7 @@ class RedisQueueListener(QueueListener):
     """
     A QueueListener implementation which fetches pickled
     records from a Redis queue using a specified key.
-    
+
     :param key: The key to use for the queue. Defaults to
                 "python.logging".
     :param redis: If specified, this instance is used to
@@ -63,7 +63,7 @@ class RedisQueueListener(QueueListener):
         if block:
             s = self.queue.blpop(self.key)[1]
         else:
-            s = self.queue.lpop(self.key)        
+            s = self.queue.lpop(self.key)
         if not s:
             record = None
         else:
@@ -72,4 +72,3 @@ class RedisQueueListener(QueueListener):
 
     def enqueue_sentinel(self):
         self.queue.rpush(self.key, '')
-

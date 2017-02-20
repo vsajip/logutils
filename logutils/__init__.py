@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2010-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2010-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 """
 The logutils package provides a set of handlers for the Python standard
@@ -13,7 +13,7 @@ of Python, and so are packaged here.
 import logging
 from string import Template
 
-__version__ = '0.3.3'
+__version__ = '0.3.4'
 
 class NullHandler(logging.Handler):
     """
@@ -29,7 +29,7 @@ class NullHandler(logging.Handler):
     def handle(self, record):
         """
         Handle a record. Does nothing in this class, but in other
-        handlers it typically filters and then emits the record in a 
+        handlers it typically filters and then emits the record in a
         thread-safe way.
         """
         pass
@@ -160,7 +160,7 @@ class BraceMessage(object):
         self.args = args
         self.kwargs = kwargs
         self.str = None
-        
+
     def __str__(self):
         if self.str is None:
             self.str = self.fmt.format(*self.args, **self.kwargs)
@@ -171,7 +171,7 @@ class DollarMessage(object):
         self.fmt = fmt
         self.kwargs = kwargs
         self.str = None
-        
+
     def __str__(self):
         if self.str is None:
             self.str = Template(self.fmt).substitute(**self.kwargs)
@@ -192,4 +192,3 @@ def hasHandlers(logger):
         else:
             logger = logger.parent
     return rv
-

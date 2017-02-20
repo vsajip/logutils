@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2008-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2008-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import sys
 from test_testing import LoggingTest

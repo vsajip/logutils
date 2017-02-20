@@ -13,7 +13,7 @@ class MessageTest(unittest.TestCase):
             self.assertEqual(str(m), 'Message with 2 placeholders')
             m = __('Message without {0:x} {1}', 16, 'placeholders')
             self.assertEqual(str(m), 'Message without 10 placeholders')
-            
+
             class Dummy:
                 pass
 
@@ -31,5 +31,3 @@ class MessageTest(unittest.TestCase):
         ignored = object()
         self.assertRaises(TypeError, __, 'Message with $num ${what}',
                           ignored, num=2, what='placeholders')
-        
-

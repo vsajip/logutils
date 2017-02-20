@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2012-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2012-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 import logutils.colorize
@@ -22,4 +22,3 @@ class ColorizeTest(unittest.TestCase):
             logger.warning(u('Some unicode string with some \u015b\u0107\u017a\xf3\u0142 chars'))
         finally:
             logger.removeHandler(handler)
-

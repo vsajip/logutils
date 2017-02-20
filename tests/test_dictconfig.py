@@ -1,5 +1,5 @@
 #
-# Copyright 2009-2013 by Vinay Sajip. See LICENSE.txt for details.
+# Copyright 2009-2017 by Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 from logutils.adapter import LoggerAdapter
@@ -695,4 +695,3 @@ class ConfigDictTest(unittest.TestCase):
         h = logging.getLogger().handlers[0]
         self.assertEqual(h.__module__, 'mytest')
         self.assertEqual(h.__class__.__name__, 'MyTestHandler')
-

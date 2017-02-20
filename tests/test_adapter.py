@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2008-2013 Vinay Sajip. See LICENSE.txt for details.
+# Copyright (C) 2008-2017 Vinay Sajip. See LICENSE.txt for details.
 #
 import logging
 from logutils.adapter import LoggerAdapter
@@ -67,4 +67,3 @@ class AdapterTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
