@@ -7,10 +7,10 @@ import re
 
 
 def description():
-    f = open(join(dirname(__file__), 'README.txt'))
+    f = open(join(dirname(__file__), 'README.rst'))
     readme = f.read()
     f.close()
-    regexp = r'^logutils\s*[\d.]*\s*\n=======+\s*\n(.*)Requirements '
+    regexp = r'logutils\s*[\d.]*\s*\n=======+\s*\n(.*)Requirements '
     reqts, = re.findall(regexp, readme, re.DOTALL)
     regexp = r'Availability & Documentation\s*\n-----+\s*\n(.*)'
     avail, = re.findall(regexp, readme, re.DOTALL)
