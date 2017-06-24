@@ -4,7 +4,7 @@
 .. image:: https://coveralls.io/repos/vsajip/logutils/badge.svg
    :target: https://coveralls.io/github/vsajip/logutils
 
-logutils 0.3.4
+logutils 0.3.5
 ==============
 The logutils package provides a set of handlers for the Python standard
 library's logging package.
