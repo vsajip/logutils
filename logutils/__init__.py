@@ -13,7 +13,7 @@ of Python, and so are packaged here.
 import logging
 from string import Template
 
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 
 class NullHandler(logging.Handler):
     """
