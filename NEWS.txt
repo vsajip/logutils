@@ -5,6 +5,12 @@
 What's New in logutils
 ======================
 
+Version 0.3.5
+-------------
+
+- Bring QueueListener implementation in line with the version in the stdlib.
+- Fixed a bug in ColorizingStreamHandler relating to encoding.
+
 Version 0.3.4
 -------------
 
@@ -20,10 +26,8 @@ Version 0.3.2
 -------------
 
 - Improvements in QueueListener implementation.
-- Added redis module with RedisQueueHandler and
-  RedisQueueListener.
-- Added unit test for a handler in a module
-  where absolute imports are used.
+- Added redis module with RedisQueueHandler and RedisQueueListener.
+- Added unit test for a handler in a module where absolute imports are used.
 
 Version 0.3.1
 -------------
