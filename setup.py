@@ -21,8 +21,8 @@ def missing_files():
 
         FILES = ('cat.exe', 'echo.exe', 'tee.exe', 'false.exe', 'true.exe',
                  'sleep.exe', 'touch.exe')
-        print('APPVEYOR: %s' % os.environ.get('APPVEYOR'))
-        if os.environ.get('APPVEYOR', 'FALSE') != 'TRUE':
+        print('TESTING_ON_AV: %s' % os.environ.get('TESTING_ON_AV'))
+        if 'TESTING_ON_AV' in os.environ:
             FILES = ('libiconv2.dll', 'libintl3.dll') + FILES
 
         missing = []

@@ -1,6 +1,6 @@
 version: 1.0.{build}
 environment:
-  APPVEYOR: TRUE
+  TESTING_ON_AV: 1
   matrix:
   - TOXENV: py27
   - TOXENV: py35
