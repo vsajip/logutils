@@ -6,31 +6,6 @@ import os
 from os.path import join, dirname, abspath
 import re
 
-def missing_files():
-    result = []
-    if os.name == 'nt':
-
-        def found_file(fn):
-            if os.path.exists(fn):
-                return True
-            for d in os.environ['PATH'].split(os.pathsep):
-                p = os.path.join(d, fn)
-                if os.path.exists(p):
-                    return True
-            return False
-
-        FILES = ('cat.exe', 'echo.exe', 'tee.exe', 'false.exe', 'true.exe',
-                 'sleep.exe', 'touch.exe')
-        if 'TESTING_ON_AV' in os.environ:
-            FILES = ('libiconv2.dll', 'libintl3.dll') + FILES
-
-        missing = []
-        for fn in FILES:
-            if not found_file(fn):
-                result.append(fn)
-    return result
-
-
 def description():
     f = open(join(dirname(__file__), 'README.rst'))
     readme = f.read()
@@ -45,13 +20,6 @@ class TestCommand(distutils.core.Command):
     user_options = []
 
     def run(self):
-        missing = missing_files()
-
-        if missing:
-            missing = ', '.join(missing)
-            raise ValueError('Can\'t find one or more files needed for '
-                             'tests: %s' % missing)
-
         import sys
         import unittest
 
