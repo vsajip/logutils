@@ -1,0 +1,10 @@
+*.pyc
+*.pyo
+build
+dist
+doc/themes
+doc/_build
+.tox
+.coverage
+MANIFEST
+
