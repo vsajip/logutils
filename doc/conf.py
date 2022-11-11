@@ -14,7 +14,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
+import datetime, sys, os
 
 # If your extensions (or modules documented by autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Logutils'
-copyright = u'2010-2017, Vinay Sajip'
+copyright = u'2010-%s, Vinay Sajip' % datetime.date.today().year
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -171,8 +171,8 @@ htmlhelp_basename = 'Logutilsdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'Logutils.tex', ur'Logutils Documentation',
-   ur'Vinay Sajip', 'manual'),
+  ('index', 'Logutils.tex', r'Logutils Documentation',
+   r'Vinay Sajip', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
