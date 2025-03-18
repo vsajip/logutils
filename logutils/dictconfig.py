@@ -290,7 +290,10 @@ class DictConfigurator(BaseConfigurator):
             raise ValueError("Unsupported version: %s" % config['version'])
         incremental = config.pop('incremental', False)
         EMPTY_DICT = {}
-        logging._acquireLock()
+        if hasattr(logging, '_acquireLock'):
+            logging._acquireLock()
+        else:
+            logging._lock.acquire()
         try:
             if incremental:
                 handlers = config.get('handlers', EMPTY_DICT)
@@ -431,7 +434,10 @@ class DictConfigurator(BaseConfigurator):
                         raise ValueError('Unable to configure root '
                                          'logger: %s' % e)
         finally:
-            logging._releaseLock()
+            if hasattr(logging, '_releaseLock'):
+                logging._releaseLock()
+            else:
+                logging._lock.release()
 
     def configure_formatter(self, config):
         """Configure a formatter from a dictionary."""

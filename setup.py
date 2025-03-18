@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import distutils.core
+try:
+    from distutils.core import Command, setup
+except ImportError:
+    from setuptools import Command, setup
+
 import logutils
 import os
 from os.path import join, dirname, abspath
@@ -16,7 +20,7 @@ def description():
     avail, = re.findall(regexp, readme, re.DOTALL)
     return reqts + avail
 
-class TestCommand(distutils.core.Command):
+class TestCommand(Command):
     user_options = []
 
     def run(self):
@@ -37,7 +41,7 @@ class TestCommand(distutils.core.Command):
     def finalize_options(self):
         pass
 
-distutils.core.setup(
+setup(
     name='logutils',
     version=logutils.__version__,
     author='Vinay Sajip',

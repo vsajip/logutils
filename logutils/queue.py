@@ -24,6 +24,7 @@ try:
     import Queue as queue
 except ImportError:
     import queue
+import sys
 import threading
 
 class QueueHandler(logging.Handler):
@@ -141,7 +142,10 @@ class QueueListener(object):
         LogRecords to process.
         """
         self._thread = t = threading.Thread(target=self._monitor)
-        t.setDaemon(True)
+        if sys.version_info[:2] < (3, 10):
+            t.setDaemon(True)
+        else:
+            t.daemon = True
         t.start()
 
     def prepare(self , record):

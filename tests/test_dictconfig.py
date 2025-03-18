@@ -39,7 +39,10 @@ class ConfigDictTest(unittest.TestCase):
         self.adapter = LoggerAdapter(l, {})
 
         logger_dict = logging.getLogger().manager.loggerDict
-        logging._acquireLock()
+        if hasattr(logging, '_acquireLock'):
+            logging._acquireLock()
+        else:
+            logging._lock.acquire()
         try:
             self.saved_handlers = logging._handlers.copy()
             self.saved_handler_list = logging._handlerList[:]
@@ -50,7 +53,10 @@ class ConfigDictTest(unittest.TestCase):
                 self.saved_level_to_name = logging._levelToName.copy()
                 self.saved_name_to_level = logging._nameToLevel.copy()
         finally:
-            logging._releaseLock()
+            if hasattr(logging, '_releaseLock'):
+                logging._releaseLock()
+            else:
+                logging._lock.release()
 
         self.root_logger = logging.getLogger("")
         self.original_logging_level = self.root_logger.getEffectiveLevel()
@@ -58,7 +64,10 @@ class ConfigDictTest(unittest.TestCase):
 
     def tearDown(self):
         self.root_logger.setLevel(self.original_logging_level)
-        logging._acquireLock()
+        if hasattr(logging, '_acquireLock'):
+            logging._acquireLock()
+        else:
+            logging._lock.acquire()
         try:
             if hasattr(logging, '_levelNames'):
                 logging._levelNames.clear()
@@ -75,7 +84,10 @@ class ConfigDictTest(unittest.TestCase):
             loggerDict.clear()
             loggerDict.update(self.saved_loggers)
         finally:
-            logging._releaseLock()
+            if hasattr(logging, '_releaseLock'):
+                logging._releaseLock()
+            else:
+                logging._lock.release()
 
     message_num = 0
 
@@ -496,7 +508,7 @@ class ConfigDictTest(unittest.TestCase):
         },
         'handlers' : {
             'hand1' : {
-                '()': 'mytest.MyTestHandler',
+                '()': 'tests.mytest.MyTestHandler',
                 'formatter': 'form1',
                 'filters' : ['filt1'],
             }
@@ -568,7 +580,7 @@ class ConfigDictTest(unittest.TestCase):
             raise RuntimeError()
         except RuntimeError:
             logging.exception("just testing")
-        self.assertEquals(h.formatted[0],
+        self.assertEqual(h.formatted[0],
             "ERROR:root:just testing\nGot a [RuntimeError]")
 
     def test_config4a_ok(self):
@@ -580,7 +592,7 @@ class ConfigDictTest(unittest.TestCase):
             raise RuntimeError()
         except RuntimeError:
             logging.exception("just testing")
-        self.assertEquals(h.formatted[0],
+        self.assertEqual(h.formatted[0],
             "ERROR:root:just testing\nGot a [RuntimeError]")
 
     def test_config5_ok(self):
@@ -693,5 +705,5 @@ class ConfigDictTest(unittest.TestCase):
     def test_config_11_ok(self):
         self.apply_config(self.config11)
         h = logging.getLogger().handlers[0]
-        self.assertEqual(h.__module__, 'mytest')
+        self.assertEqual(h.__module__, 'tests.mytest')
         self.assertEqual(h.__class__.__name__, 'MyTestHandler')

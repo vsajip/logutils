@@ -1,5 +1,5 @@
 \.py[co]
-(build|dist|doc/themes|\.tox)/
+(build|dist|doc/themes|\.(tox|egg-info))/
 .coverage$
 MANIFEST
 

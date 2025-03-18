@@ -4,7 +4,10 @@
 import logging
 from logutils.testing import TestHandler, Matcher
 from logutils.redis import RedisQueueHandler, RedisQueueListener
-from redis import Redis
+try:
+    from redis import Redis
+except ImportError:
+    redis = None
 import socket
 import subprocess
 import time
@@ -17,6 +20,7 @@ class QueueListener(RedisQueueListener):
             record = logging.makeLogRecord(record)
         return record
 
+@unittest.skipUnless(redis, 'Redis not available')
 class RedisQueueTest(unittest.TestCase):
     def setUp(self):
         self.handler = h = TestHandler(Matcher())
